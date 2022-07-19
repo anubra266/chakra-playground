@@ -3,7 +3,7 @@ import Script from "next/script";
 import loader from "@monaco-editor/loader";
 declare var window: Window &
   typeof globalThis & {
-    ts: string;
+    ts: typeof import("typescript");
   };
 
 export default function Home() {
