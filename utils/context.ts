@@ -1,6 +1,6 @@
 import { createContext } from "@chakra-ui/react-utils";
 import { Orientation } from "utils/constants";
-import { TabKey } from "utils/types";
+import { Tab, TabKey } from "utils/types";
 
 export type PlaygroundContext = {
   orientation: Orientation;
@@ -9,9 +9,7 @@ export type PlaygroundContext = {
   setForModel: (args: { key: string; type: string; value: string }) => void;
   activeTab: string;
   setActiveTab: React.Dispatch<React.SetStateAction<string>>;
-  tabs: {
-    key: string;
-  }[];
+  tabs: Tab[];
   setTabs: React.Dispatch<React.SetStateAction<PlaygroundContext["tabs"]>>;
   removeTab: (keyToRemove: TabKey) => void;
   appValue: string;

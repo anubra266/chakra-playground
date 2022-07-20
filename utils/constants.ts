@@ -1,4 +1,4 @@
-import { Layout } from "utils/types";
+import { Layout, Tab, TabKey } from "utils/types";
 import { BsLayoutSplit, BsLayoutTextSidebar } from "react-icons/bs";
 import { IoBrowsersOutline } from "react-icons/io5";
 import { VscSplitVertical } from "react-icons/vsc";
@@ -10,7 +10,7 @@ export enum Orientation {
   EDITOR = "editor",
 }
 
-export const DEFAULT_TABS = [{ key: "App" }, { key: "styles" }];
+export const DEFAULT_TABS: Tab[] = [{ key: "App" }, { key: "styles" }];
 
 export const layouts: Layout[] = [
   {
