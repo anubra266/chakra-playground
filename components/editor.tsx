@@ -3,18 +3,34 @@ import loader from "@monaco-editor/loader";
 import { useEditorTheme } from "utils/editor-themes/use-editor-theme";
 import { Sandbox, SandboxConfig } from "@typescript/sandbox";
 import { useRef } from "react";
+import { usePlaygroundContext } from "utils/context";
+import { chakra } from "@chakra-ui/react";
+
 declare var window: Window &
   typeof globalThis & {
     ts: typeof import("typescript");
   };
 
-type EditorProps = {
-  initialCode: string;
-};
-export const Editor = (props: EditorProps) => {
-  const { initialCode } = props;
-  const { theme } = useEditorTheme();
+const initialCode = `import React from "react"
+  import { ChakraProvider, Box } from "@chakra-ui/react"
+    
+    function App(){
+      return (
+          <ChakraProvider>
+              <Box bg="red.300">
+                  wow
+              </Box>
+          </ChakraProvider>
+      )
+    }
+    `;
 
+type EditorProps = {};
+export const Editor = (props: EditorProps) => {
+  const {} = props;
+  const { theme } = useEditorTheme();
+  const { setForModel, activeTab, appValue } = usePlaygroundContext();
+  const initialCode = appValue;
   const sandboxRef = useRef<Sandbox>();
 
   return (
@@ -67,16 +83,19 @@ export const Editor = (props: EditorProps) => {
 
             const currentModel = sandbox.editor.getModel();
             currentModel.onDidChangeContent(() => {
-              const modelValue = currentModel.getValue();
+              const value = currentModel.getValue();
               // whatever I want with the value
+              setForModel({ key: activeTab, type: "value", value });
             });
+
+            //TODO Editor path for multi modelling
 
             sandboxRef.current = sandbox;
           });
         }}
       />
       <div id="loader">Loading...</div>
-      <div id="monaco-editor" style={{ height: "800px" }} />
+      <chakra.div id="monaco-editor" boxSize="full" />
     </>
   );
 };
