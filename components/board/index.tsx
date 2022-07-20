@@ -42,7 +42,7 @@ const Board = () => {
         },
       }}
     >
-      <ReflexContainer orientation={orientation}>
+      <ReflexContainer orientation={orientation as any}>
         <ReflexElement
           minSize={360}
           className="editor"
